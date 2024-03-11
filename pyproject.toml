@@ -1,5 +1,5 @@
 [project]
-name = "example_package_sakettest"
+name = "example_package_saketc"
 version = "0.0.1"
 authors = [
   { name="Saket C", email="saket@example.com" },
