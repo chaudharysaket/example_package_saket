@@ -56,7 +56,7 @@ jobs:
 
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/example_package_sakettest
+      url: https://test.pypi.org/p/example_package_saketc
 
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
