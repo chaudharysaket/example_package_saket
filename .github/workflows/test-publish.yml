@@ -20,7 +20,7 @@ jobs:
       run: >-
         pip install -q -U pip
         pip install -q pipenv
-        pipenv install --dev
+        # pipenv install --dev
         pipenv run pytest --cov-report=xml --cov=example_package_saketc tests
     - name: Upload coverage report
       run: bash -c "$(curl -s https://codecov.io/bash)"
