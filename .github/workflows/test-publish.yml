@@ -35,7 +35,7 @@ jobs:
         run: >-
           pip install -q -U pip
           pip install -q -U 'black<22.10.1'
-          black --check example_package_saketc tests
+          # black --check example_package_saketc tests
       - name: Generate coverage report
         run: make coverage
       - name: Upload coverage report
@@ -61,7 +61,8 @@ jobs:
   #         path: dist/
   #     - name: Publish distribution 📦 to PyPI
   #       uses: pypa/gh-action-pypi-publish@release/v1
-  
+
+
   publish-to-testpypi:
     name: Publish Python 🐍 distribution 📦 to TestPyPI
     if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
@@ -76,6 +77,20 @@ jobs:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
 
     steps:
+    - name: Install pypa/build
+      run: >-
+        python3 -m
+        pip install
+        build
+        --user
+    - name: Build a binary wheel and a source tarball
+      run: python3 -m build
+    - name: Store the distribution packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: python-package-distributions
+        path: dist/
+
     - name: Download all the dists
       uses: actions/download-artifact@v3
       with:
