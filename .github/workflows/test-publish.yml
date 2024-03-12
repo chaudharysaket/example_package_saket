@@ -75,6 +75,8 @@ jobs:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
     - name: Install release dependencies
       run: >-
         pip install -q -U pip
