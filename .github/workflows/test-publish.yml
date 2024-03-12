@@ -75,26 +75,35 @@ jobs:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
 
     steps:
-    - name: Install pypa/build
+    - name: Install release dependencies
       run: >-
-        python3 -m
-        pip install
-        build
-        --user
-    - name: Build a binary wheel and a source tarball
-      run: python3 -m build
-    - name: Store the distribution packages
-      uses: actions/upload-artifact@v3
-      with:
-        name: python-package-distributions
-        path: dist/
+        pip install -q -U pip
+        pip install -q -U pyOpenSSL setuptools twine wheel
+    - name: Release package
+      run: >-
+        python setup.py sdist bdist_wheel
+        twine check dist/*
+        twine upload dist/*
+    # - name: Install pypa/build
+    #   run: >-
+    #     python3 -m
+    #     pip install
+    #     build
+    #     --user
+    # - name: Build a binary wheel and a source tarball
+    #   run: python3 -m build
+    # - name: Store the distribution packages
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: python-package-distributions
+    #     path: dist/
 
-    - name: Download all the dists
-      uses: actions/download-artifact@v3
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Publish distribution 📦 to TestPyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        repository-url: https://test.pypi.org/legacy/
+    # - name: Download all the dists
+    #   uses: actions/download-artifact@v3
+    #   with:
+    #     name: python-package-distributions
+    #     path: dist/
+    # - name: Publish distribution 📦 to TestPyPI
+    #   uses: pypa/gh-action-pypi-publish@release/v1
+    #   with:
+    #     repository-url: https://test.pypi.org/legacy/
