@@ -5,8 +5,8 @@ from setuptools import setup, find_packages
 README = open(os.path.join(os.path.dirname(__file__), "README.md"), "r").read()
 
 setup(
-    name='HelloWorldCLI',
-    version='0.0.2',
+    name='example_package_saketc',
+    version='0.0.3',
     packages=find_packages(),
     long_description=README,
     long_description_content_type="text/markdown",
